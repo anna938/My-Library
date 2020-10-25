@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 class AddBook extends Component {
     state = {
@@ -23,16 +23,20 @@ class AddBook extends Component {
         if (this.state.query !== '') {
             console.log(this.state.query);
             BooksAPI.search(this.state.query).then((book) => (
+
                 this.setState((currentState) => ({
                     newBook: book
                 }))
             ))
+            console.log(this.state.newBook);
+
         }
 
     }
 
     render() {
         const { newBook, query } = this.state;
+        const { books, updateShelf } = this.props;
         //console.log(query);
         return (
             <div className="search-books">
@@ -46,10 +50,12 @@ class AddBook extends Component {
                 {query !== '' && (
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {newBook.length > 0 && newBook.map((item) => (
-                                <Book key={item.id} book={item} updateShelf={this.props.updateShelf} />
+                            {newBook.length > 0 ? newBook.map((item) => (
+                                <li key={item.id}>
+                                    <Book key={item.id} book={item} updateShelf={updateShelf} currentBooks={books} />
+                                </li>
 
-                            ))
+                            )) : <div><h2>No Result Found.</h2></div>
                             }
                         </ol>
                     </div>
@@ -60,6 +66,6 @@ class AddBook extends Component {
 }
 export default AddBook;
 
-AddBook.PropTypes = {
-    updateShelf: PropTypes.func.isRequired
+AddBook.propTypes = {
+    updateShelf: propTypes.func.isRequired
 }
