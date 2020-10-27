@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
+import propTypes from 'prop-types';
 
 class BookLists extends Component {
-    static PropTypes = {
-        updateShelf: PropTypes.func.isRequired,
-        books: PropTypes.array.isRequired
-    }
+
     state = {
         shelves: [
             { title: 'Currentlty Reading', shelf: 'currentlyReading' },
@@ -33,7 +30,7 @@ class BookLists extends Component {
                         </div>
                     </div>
                     <div className="open-search">
-                        <Link to="/addBook"><button>Add a Book</button></Link>
+                        <Link to="/search"><button>Add a Book</button></Link>
                     </div>
                 </div>
             </React.Fragment>
@@ -41,3 +38,9 @@ class BookLists extends Component {
     }
 }
 export default BookLists;
+
+BookLists.propTypes = {
+    updateShelf: propTypes.func.isRequired,
+    books: propTypes.array.isRequired,
+
+}
