@@ -13,8 +13,9 @@ class Book extends Component {
         let result;
         if (book !== '') {
             result = currentBooks.filter(a => a.id === book.id).map(item => item.shelf);
-            console.log(result[0]);
+            //console.log(result[0]);
             //console.log(result['id']);
+            //console.log(book.shelf);
         }
 
         return (
@@ -25,7 +26,7 @@ class Book extends Component {
                         {/*{findArrayElementByTitle(currentBooks, book)}*/}
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail ? `${book.imageLinks.thumbnail}` : `http://via.placeholder.com/128x193?text=No%20Cover`})` }}></div>
                         <div className="book-shelf-changer">
-                            <select onChange={(e) => this.handleChange(e, { book })} value={result[0] !== undefined ? result[0] : "none"} >
+                            <select onChange={(e) => this.handleChange(e, book)} value={result[0] !== undefined ? result[0] : "none"} >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
